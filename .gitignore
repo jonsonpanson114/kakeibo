@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Streamlit
+.streamlit/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (Sensitive local data)
+*.csv
+# learned_categories.json などは管理対象にしたい場合もあるが、
+# データ量が多い場合は除外を検討。今回は一旦ソースのみに絞る。
