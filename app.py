@@ -1028,7 +1028,13 @@ st.markdown(LIGHT_CSS, unsafe_allow_html=True)
 # Sidebar
 with st.sidebar:
     st.markdown("### ⚙️ 設定")
-    api_key = st.text_input("Gemini API Key", type="password")
+    
+    # APIキーの自動読み込み（Secrets優先）
+    if "GEMINI_API_KEY" in st.secrets:
+        api_key = st.secrets["GEMINI_API_KEY"]
+        st.success("APIキー連携済み")
+    else:
+        api_key = st.text_input("Gemini API Key", type="password")
 
     st.markdown("---")
     st.markdown("### 📅 表示月")
