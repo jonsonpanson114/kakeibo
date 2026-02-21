@@ -1029,11 +1029,18 @@ st.markdown(LIGHT_CSS, unsafe_allow_html=True)
 with st.sidebar:
     st.markdown("### ⚙️ 設定")
     
-    # APIキーの自動読み込み（Secrets優先）
-    if "GEMINI_API_KEY" in st.secrets:
-        api_key = st.secrets["GEMINI_API_KEY"]
-        st.success("APIキー連携済み")
-    else:
+    # APIキーの自動読み込み（Secrets優先、エラーハンドリング付き）
+    api_key = ""
+    try:
+        if "GEMINI_API_KEY" in st.secrets:
+            api_key = st.secrets["GEMINI_API_KEY"]
+            st.success("APIキー連携済み")
+    except FileNotFoundError:
+        pass
+    except Exception:
+        pass  # Secretsが無い場合はスルー
+
+    if not api_key:
         api_key = st.text_input("Gemini API Key", type="password")
 
     st.markdown("---")
